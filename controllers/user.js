@@ -12,7 +12,7 @@ function createToken(user, SECRET_KEY, expiredIn) {
     email,
   };
 
-  return jwt.sign(payload, SECRET_KEY, { expiresIn: expiredIn });
+  return jwt.sign(payload, SECRET_KEY);
 }
 
 async function registerUser(input) {
@@ -48,6 +48,26 @@ async function registerUser(input) {
   }
 }
 
+async function login(input) {
+  const { email, password } = input;
+
+  const userFound = await User.findOne({ email: email.toLowerCase() });
+
+  if (!userFound)
+    throw new Error("La contraseña o el password son incorrectos");
+
+  const passwordSuccess = await brcryptjs.compare(password, userFound.password);
+
+  if (!passwordSuccess)
+    throw new Error("La contraseña o el password son incorrectos");
+
+
+  return {
+    token: createToken(userFound, process.env.SECRET_KEY),
+  };
+}
+
 module.exports = {
-    registerUser,
+  registerUser,
+  login,
 };

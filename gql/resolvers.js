@@ -12,6 +12,7 @@ const resolvers = {
   Mutation: {
     // USER
    registerUser: (_, {input}) => userController.registerUser(input),
+   login: (_, {input}) => userController.login(input),
   }
 };
 
