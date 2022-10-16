@@ -5,6 +5,18 @@ const typeDefs = gql`
     id: ID
     name: String
     username: String
+    avatar: String
+    description: String
+    email: String
+    portada: String
+  }
+
+  type Tweet {
+    id: ID!
+    user: User
+    text: String
+    photo: String
+    likes: Int
   }
 
   type Token {
@@ -18,22 +30,32 @@ const typeDefs = gql`
     password: String!
   }
 
-
   input LoginInput {
-    email:String!
+    email: String!
     password: String!
+  }
+
+  input Tweets {
+    username: String!
+    text: String!
+    photo: String
   }
 
   type Query {
     #USER
-    getUser: User
+    getUser(username: String!): User
   }
 
   type Mutation {
     #USER
-    registerUser(input:UserInput): User
+    registerUser(input: UserInput): User
     login(input: LoginInput): Token
-  } 
-`;
+    uploadAvatar(file: String!, username: String!): Boolean
+
+
+    #TWEETS
+    createTweet(input: Tweets): Tweet
+  }
+  `;
 
 module.exports = typeDefs;

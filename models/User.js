@@ -26,6 +26,11 @@ const UserSchema = new Schema({
         trim: true,
     },
 
+    portada: {
+        type: String,
+        trim: true,
+    },
+
     description:{
         type: String,
         trim: true,

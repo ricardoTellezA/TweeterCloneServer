@@ -15,6 +15,21 @@ function createToken(user, SECRET_KEY, expiredIn) {
   return jwt.sign(payload, SECRET_KEY);
 }
 
+async function getUsuer(username) {
+  const { username: usernameUser } = username;
+
+  try {
+    const user = await User.findOne({ username: usernameUser.toLowerCase() });
+    if (!user) {
+      throw new Error("El usuario no existe");
+    }
+
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 async function registerUser(input) {
   const newUser = input;
   newUser.email = newUser.email.toLowerCase();
@@ -53,21 +68,38 @@ async function login(input) {
 
   const userFound = await User.findOne({ email: email.toLowerCase() });
 
-  if (!userFound)
-    throw new Error("La contraseña o el password son incorrectos");
+  if (!userFound) throw new Error("La contraseña o el correo son incorrectos");
 
   const passwordSuccess = await brcryptjs.compare(password, userFound.password);
 
   if (!passwordSuccess)
-    throw new Error("La contraseña o el password son incorrectos");
-
+    throw new Error("La contraseña o el correo son incorrectos");
 
   return {
     token: createToken(userFound, process.env.SECRET_KEY),
   };
 }
 
+async function uploadAvatar(file, username) {
+  const user = await User.findOne({ username: username.toLowerCase() });
+
+  if (!user) {
+    throw new Error("El usuario no existe");
+  }
+
+  try {
+    user.avatar = file;
+    user.save();
+    return true;
+  } catch (error) {
+    console.log(error);
+  }
+  return null;
+}
+
 module.exports = {
   registerUser,
   login,
+  getUsuer,
+  uploadAvatar,
 };
