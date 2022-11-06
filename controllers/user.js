@@ -80,7 +80,7 @@ async function login(input) {
   };
 }
 
-async function uploadAvatar(file, username) {
+async function uploadAvatar(file, username, isAvatar) {
   const user = await User.findOne({ username: username.toLowerCase() });
 
   if (!user) {
@@ -88,7 +88,11 @@ async function uploadAvatar(file, username) {
   }
 
   try {
-    user.avatar = file;
+    if (isAvatar) {
+      user.avatar = file;
+    } else {
+      user.portada = file;
+    }
     user.save();
     return true;
   } catch (error) {

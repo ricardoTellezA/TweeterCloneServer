@@ -50,7 +50,7 @@ const typeDefs = gql`
     #USER
     registerUser(input: UserInput): User
     login(input: LoginInput): Token
-    uploadAvatar(file: String!, username: String!): Boolean
+    uploadAvatar(file: String!, username: String!, isAvatar: Boolean!): Boolean
 
 
     #TWEETS
