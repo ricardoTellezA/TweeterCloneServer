@@ -9,6 +9,7 @@ const typeDefs = gql`
     description: String
     email: String
     portada: String
+    tweets: [Tweet]
   }
 
   type Tweet {

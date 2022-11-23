@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Tweet = require("../models/Tweets");
 const brcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
@@ -20,6 +21,13 @@ async function getUsuer(username) {
 
   try {
     const user = await User.findOne({ username: usernameUser.toLowerCase() });
+    const findTweet = await Tweet.find({
+      username: usernameUser.toLowerCase(),
+    });
+    if (!findTweet) throw new Error("No se encontraron tweets");
+
+    user.tweets = findTweet;
+
     if (!user) {
       throw new Error("El usuario no existe");
     }
