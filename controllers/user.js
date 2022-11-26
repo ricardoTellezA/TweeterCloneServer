@@ -21,12 +21,12 @@ async function getUsuer(username) {
 
   try {
     const user = await User.findOne({ username: usernameUser.toLowerCase() });
-    const findTweet = await Tweet.find({
-      username: usernameUser.toLowerCase(),
-    });
-    if (!findTweet) throw new Error("No se encontraron tweets");
+     const tweets = await Tweet.find({ userId: user._id }).sort({ createdAt: -1 });
+      
+  
+    if (!tweets) throw new Error("No se encontraron tweets");
 
-    user.tweets = findTweet;
+    user.tweets = tweets;
 
     if (!user) {
       throw new Error("El usuario no existe");
