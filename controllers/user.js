@@ -109,9 +109,37 @@ async function uploadAvatar(file, username, isAvatar) {
   return null;
 }
 
+async function editUser(input) {
+  const { username, name, description, avatar, portada } = input;
+
+  const user = await User.findOne({ username: username.toLowerCase() });
+
+  if (!user) throw new Error("El usuario no existe");
+
+  try {
+    user.name = name;
+    user.description = description;
+    user.avatar = avatar;
+    user.portada = portada;
+
+    user.save();
+    return user;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function searchUser(name) {
+  const { name: nameUser } = name;
+  const user = await User.find({ name: { $regex: nameUser, $options: "i" } });
+  return user;
+}
+
 module.exports = {
   registerUser,
   login,
   getUsuer,
   uploadAvatar,
+  editUser,
+  searchUser,
 };

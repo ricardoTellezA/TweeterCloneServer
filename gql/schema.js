@@ -31,6 +31,15 @@ const typeDefs = gql`
     password: String!
   }
 
+  input EditUserInput {
+    username: String!
+    name: String
+    description: String
+    avatar: String
+    portada: String
+
+  }
+
   input LoginInput {
     email: String!
     password: String!
@@ -45,6 +54,7 @@ const typeDefs = gql`
   type Query {
     #USER
     getUser(username: String!): User
+    searchUser(name: String!): [User]
   }
 
   type Mutation {
@@ -52,6 +62,8 @@ const typeDefs = gql`
     registerUser(input: UserInput): User
     login(input: LoginInput): Token
     uploadAvatar(file: String!, username: String!, isAvatar: Boolean!): Boolean
+    followUser(idUser: ID!, idFollow: ID!): Boolean
+    editUser(input: EditUserInput): User
 
 
     #TWEETS

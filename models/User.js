@@ -36,6 +36,8 @@ const UserSchema = new Schema({
         trim: true,
     },
 
+    
+
     password:{
         type: String,
         required: true,
