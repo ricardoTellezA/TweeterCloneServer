@@ -11,6 +11,21 @@ async function createTweet(input) {
   }
 }
 
+async function getTweets(username) {
+  const { username: usernameUser } = username;
+  const user = await User.findOne({ username: usernameUser });
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+  const tweets = await Tweet.find({ userId: user._id }).sort({ createdAt: -1 });
+
+  if (!tweets) throw new Error("No se encontraron tweets");
+
+  return tweets;
+}
+
 module.exports = {
   createTweet,
+  getTweets,
 };

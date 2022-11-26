@@ -55,6 +55,7 @@ const typeDefs = gql`
     #USER
     getUser(username: String!): User
     searchUser(name: String!): [User]
+    getTweets(username: String!): [Tweet]
   }
 
   type Mutation {
@@ -68,6 +69,7 @@ const typeDefs = gql`
 
     #TWEETS
     createTweet(input: Tweets): Tweet
+   
   }
   `;
 

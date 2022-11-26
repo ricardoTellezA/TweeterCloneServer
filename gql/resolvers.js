@@ -7,6 +7,8 @@ const resolvers = {
     // USER
     getUser: async (_, username) => userController.getUsuer(username),
     searchUser: async (_, name) => userController.searchUser(name),
+
+    getTweets: async (_, username) => tweetController.getTweets(username),
   },
 
   Mutation: {
@@ -17,7 +19,8 @@ const resolvers = {
     uploadAvatar: (_, { file, username, isAvatar }) =>
       userController.uploadAvatar(file, username, isAvatar),
 
-    followUser: (_, { idUser, idFollow }) => followController.followUser(idUser, idFollow),
+    followUser: (_, { idUser, idFollow }) =>
+      followController.followUser(idUser, idFollow),
     editUser: (_, { input }) => userController.editUser(input),
   },
 };
