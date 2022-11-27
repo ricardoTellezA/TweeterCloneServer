@@ -18,6 +18,7 @@ const typeDefs = gql`
     text: String
     photo: String
     likes: Int
+    createdAt: String
   }
 
   type Token {

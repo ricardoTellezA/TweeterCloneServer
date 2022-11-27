@@ -2,8 +2,13 @@ const User = require("../models/User");
 const Tweet = require("../models/Tweets");
 
 async function createTweet(input) {
-  const newTweet = new Tweet(input);
   try {
+    const newTweet = new Tweet({
+      userId: input.userId,
+      text: input.text,
+      photo: input.photo,
+      createdAt: new Date(),
+    });
     const tweet = await newTweet.save();
     return tweet;
   } catch (error) {

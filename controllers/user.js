@@ -19,23 +19,18 @@ function createToken(user, SECRET_KEY, expiredIn) {
 async function getUsuer(username) {
   const { username: usernameUser } = username;
 
-  try {
-    const user = await User.findOne({ username: usernameUser.toLowerCase() });
-     const tweets = await Tweet.find({ userId: user._id }).sort({ createdAt: -1 });
-      
-  
-    if (!tweets) throw new Error("No se encontraron tweets");
+  const user = await User.findOne({ username: usernameUser.toLowerCase() });
+  const tweets = await Tweet.find({ userId: user._id }).sort({ createdAt: -1 });
 
-    user.tweets = tweets;
+  if (!tweets) throw new Error("No se encontraron tweets");
 
-    if (!user) {
-      throw new Error("El usuario no existe");
-    }
+  user.tweets = tweets;
 
-    return user;
-  } catch (error) {
-    console.log(error);
+  if (!user) {
+    throw new Error("El usuario no existe");
   }
+
+  return user;
 }
 
 async function registerUser(input) {
