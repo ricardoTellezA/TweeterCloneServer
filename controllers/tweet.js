@@ -4,7 +4,7 @@ const Tweet = require("../models/Tweets");
 async function createTweet(input) {
   try {
     const newTweet = new Tweet({
-      userId: input.userId,
+      username: input.username,
       text: input.text,
       photo: input.photo,
       createdAt: new Date(),
