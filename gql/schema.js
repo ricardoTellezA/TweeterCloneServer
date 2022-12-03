@@ -70,6 +70,7 @@ const typeDefs = gql`
 
     #TWEETS
     createTweet(input: Tweets): Tweet
+    isFollow(idUser: ID!, idFollow: ID!): Boolean
    
   }
   `;

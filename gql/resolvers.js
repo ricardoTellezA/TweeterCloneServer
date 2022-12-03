@@ -21,7 +21,11 @@ const resolvers = {
 
     followUser: (_, { idUser, idFollow }) =>
       followController.followUser(idUser, idFollow),
+    isFollow: (_, { idUser, idFollow }) => followController.isFollow(idUser, idFollow),
+
+    // EDIT USER
     editUser: (_, { input }) => userController.editUser(input),
+
   },
 };
 
