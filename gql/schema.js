@@ -57,6 +57,7 @@ const typeDefs = gql`
     getUser(username: String!): User
     searchUser(name: String!): [User]
     getTweets(username: String!): [Tweet]
+    isFollow(idUser: ID!, idFollow: ID!): Boolean
   }
 
   type Mutation {
@@ -70,7 +71,6 @@ const typeDefs = gql`
 
     #TWEETS
     createTweet(input: Tweets): Tweet
-    isFollow(idUser: ID!, idFollow: ID!): Boolean
    
   }
   `;

@@ -9,6 +9,7 @@ const resolvers = {
     searchUser: async (_, name) => userController.searchUser(name),
 
     getTweets: async (_, username) => tweetController.getTweets(username),
+    isFollow: (_, { idUser, idFollow }) => followController.isFollow(idUser, idFollow),
   },
 
   Mutation: {
@@ -21,7 +22,6 @@ const resolvers = {
 
     followUser: (_, { idUser, idFollow }) =>
       followController.followUser(idUser, idFollow),
-    isFollow: (_, { idUser, idFollow }) => followController.isFollow(idUser, idFollow),
 
     // EDIT USER
     editUser: (_, { input }) => userController.editUser(input),
