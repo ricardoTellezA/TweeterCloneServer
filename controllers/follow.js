@@ -36,7 +36,17 @@ async function isFollow(idUser, idFollow) {
   return true;
 }
 
+async function unFollowUser(idUser, idFollow) {
+  await Follow.findOneAndDelete({
+    idUser,
+    follow: idFollow,
+  });
+
+  return true;
+}
+
 module.exports = {
   followUser,
   isFollow,
+  unFollowUser,
 };

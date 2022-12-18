@@ -65,8 +65,11 @@ const typeDefs = gql`
     registerUser(input: UserInput): User
     login(input: LoginInput): Token
     uploadAvatar(file: String!, username: String!, isAvatar: Boolean!): Boolean
-    followUser(idUser: ID!, idFollow: ID!): Boolean
     editUser(input: EditUserInput): User
+
+    #FOLLOW
+    followUser(idUser: ID!, idFollow: ID!): Boolean
+    unFollowUser(idUser: ID!, idFollow: ID!): Boolean
 
 
     #TWEETS

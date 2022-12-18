@@ -23,6 +23,8 @@ const resolvers = {
     followUser: (_, { idUser, idFollow }) =>
       followController.followUser(idUser, idFollow),
 
+    unFollowUser: (_, { idUser, idFollow }) => followController.unFollowUser(idUser, idFollow),
+
     // EDIT USER
     editUser: (_, { input }) => userController.editUser(input),
 
